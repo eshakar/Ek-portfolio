@@ -13,7 +13,7 @@ export function RunningLottie() {
   const mouse = useRef({ x: -1000, y: -1000 }); // Mouse position relative to container
   const facingRight = useRef(true); // Character direction
 
-  const EVASION_RADIUS = 250;
+  const EVASION_RADIUS = 120;
   const MAX_SPEED = 12;
   const ACCELERATION = 1.2;
   const FRICTION = 0.94;
@@ -140,11 +140,6 @@ export function RunningLottie() {
           className="w-full h-full drop-shadow-[2px_2px_0_var(--ink)]"
         />
       </div>
-      
-      {/* Decorative environment elements for the character to run on */}
-      <div className="absolute bottom-1 right-10 w-2 h-2 rounded-full bg-ink/20" />
-      <div className="absolute bottom-2 left-20 w-4 h-1 rounded-full bg-ink/20" />
-      <div className="absolute bottom-0 left-1/2 w-8 h-1.5 rounded-full bg-ink/20" />
     </div>
   );
 }

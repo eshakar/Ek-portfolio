@@ -72,6 +72,13 @@ dark-only). Captures what was built this session, key decisions, and what's left
     line above the grid, measures its track with a `ResizeObserver`, and **mirrors
     (`scaleX`) at each end** so it faces the way it's going. `FACES_RIGHT` flips the
     base orientation if the source art ever changes.
+- **/experience** — `experience-timeline.tsx`: comic **vertical timeline**. Title splash
+  (ISSUE #03 / "The Record"), then one node per job — the **company logo** in a comic
+  frame connected by a season-tinted rail, with a pulsing dot on the current role. Each
+  card has role + type badge + "Now" badge, company, `period · duration · location` +
+  a REMOTE chip, bullets, and skill chips. Data (6 roles from LinkedIn) in
+  `resume.ts` `experience` (now typed with type/duration/location/remote/current/logo/skills).
+  Logos in `public/images/*_logo.jpeg`; LawCrats has no logo → initial fallback.
 - Shared: `chapter.tsx` (issue-style card), `burst-badge.tsx`, `issue-nav.tsx`,
   `particles.tsx`, `theme-provider.tsx`.
 
@@ -86,8 +93,8 @@ dark-only). Captures what was built this session, key decisions, and what's left
 - `@lottiefiles/dotlottie-react` (for the nav love-cat).
 
 ## Still TODO / not yet done
-- **Projects, Experience, Connect** still use the older `Chapter` comic style — not yet
-  brought into the refined comic aesthetic used on About/Skills. (Contrast + no-particles
-  fixes already applied to them.)
+- **Connect** still uses the older `Chapter` comic style — not yet brought into the
+  refined comic aesthetic used on About/Skills/Projects/Experience. (Contrast +
+  no-particles fixes already applied.)
 - Optional: reuse the `mascot.tsx` character on other sections.
 - The nav love-cat is desktop-only; no mobile treatment.

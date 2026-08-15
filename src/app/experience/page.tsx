@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Chapter } from "@/components/chapter";
-import { ExperienceList } from "@/components/experience-list";
+import { ExperienceTimeline } from "@/components/experience-timeline";
 import { IssueNav } from "@/components/issue-nav";
 
 export const metadata: Metadata = {
@@ -10,16 +9,7 @@ export const metadata: Metadata = {
 export default function ExperiencePage() {
   return (
     <>
-      <Chapter
-        number="03"
-        label="Experience"
-        kicker="Where she's worked"
-        title="The Record"
-        pageNumber="003"
-        wide
-      >
-        <ExperienceList />
-      </Chapter>
+      <ExperienceTimeline />
       <IssueNav
         prev={{ href: "/projects", label: "Projects" }}
         next={{ href: "/connect", label: "Connect" }}

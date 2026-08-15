@@ -107,40 +107,122 @@ export const projects: Project[] = [
 export type ExperienceEntry = {
   role: string;
   company: string;
+  type: string;
   period: string;
+  duration: string;
+  location: string;
+  remote?: boolean;
+  current?: boolean;
+  logo?: string;
+  extraLogo?: string;
   bullets: string[];
+  skills: string[];
 };
 
 export const experience: ExperienceEntry[] = [
   {
     role: "Full Stack Developer",
-    company: "Ascentspark Software Pvt. Ltd.",
-    period: "Dec 2025 – Present",
+    company: "Ascentspark Software",
+    type: "Full-time",
+    period: "Dec 2025 — Present",
+    duration: "9 mos",
+    location: "Kolkata, West Bengal, India",
+    remote: true,
+    current: true,
+    logo: "/images/ascentspark_software_logo.jpeg",
+    extraLogo: "/images/logo-tenyears.gif",
     bullets: [
-      "Shipped Next.js API routes supporting real-time data across 200+ concurrent sessions, cutting backend latency by 30%.",
-      "Replaced direct API calls with TanStack Query across core flows, cutting average load time by 35%.",
-      "Refactored business logic into reusable service modules, reducing code duplication by 40%.",
-      "Resolved 15+ UI bottlenecks in production checkout and onboarding flows.",
+      "Own API integrations, endpoint development, and application logic in Next.js.",
+      "Built scalable frontend–backend data flows with TanStack Query — caching, state management, and optimized API communication.",
+      "Resolve 20+ bugs a week: UI issues, API failures, state inconsistencies, and performance bottlenecks.",
+      "Design clean, reusable API endpoints and business logic aligned with product and scalability goals.",
+      "Improve UX by refining workflows and loading states, collaborating with designers, backend engineers, and stakeholders.",
     ],
+    skills: ["Next.js", "TanStack Query", "REST APIs", "TypeScript"],
   },
   {
-    role: "Software Development Intern",
-    company: "ITJOBXS",
-    period: "Jan 2025 – Oct 2025",
+    role: "Software Developer",
+    company: "Sheryians Coding School",
+    type: "Apprenticeship",
+    period: "Sep 2025 — Jan 2026",
+    duration: "5 mos",
+    location: "India",
+    remote: true,
+    logo: "/images/the_sheryians_coding_school_logo.jpeg",
     bullets: [
-      "Diagnosed and fixed 20+ bugs across API endpoints, reducing average server response time by 25%.",
-      "Architected a Redis-based rate limiting and session caching layer from scratch, cutting request abuse by 40%.",
-      "Optimized 5+ high-traffic MongoDB queries with indexing and aggregation, saving 120ms per query.",
+      "Developed and deployed full-stack web apps on the MERN stack.",
+      "Worked with RESTful APIs, authentication systems, and state management (Redux / Context API).",
+      "Built responsive, dynamic UIs with React and Tailwind CSS.",
+      "Implemented backend services with Node.js / Express and MongoDB for data management.",
+      "Collaborated on team projects following agile workflows and Git / GitHub.",
     ],
+    skills: ["MERN", "React", "Node.js", "MongoDB"],
+  },
+  {
+    role: "Founding Engineer",
+    company: "Voxvertex",
+    type: "Full-time",
+    period: "Nov 2025 — Dec 2025",
+    duration: "2 mos",
+    location: "Ghaziabad, Uttar Pradesh, India",
+    remote: true,
+    logo: "/images/voxvertex_logo.jpeg",
+    bullets: [
+      "Core founding-team member building an AI-driven event & speaker management platform.",
+      "Built the full product stack — Next.js, React, Node.js — with AI integrations (OpenAI, LangChain, Hugging Face).",
+      "Led UI revamps and multiple redesign cycles; owned scheduling modules, performance, and SEO.",
+      "Handled scalable architecture and CI/CD; collaborated with clients, organizers, and internal teams.",
+    ],
+    skills: ["Next.js", "Node.js", "OpenAI", "LangChain"],
+  },
+  {
+    role: "Software Developer Intern",
+    company: "ITJOBXS",
+    type: "Internship",
+    period: "Jan 2025 — Oct 2025",
+    duration: "10 mos",
+    location: "India",
+    remote: true,
+    logo: "/images/itjobxs_logo.jpeg",
+    bullets: [
+      "Designed and developed responsive web pages, improving site engagement by 40%.",
+      "Implemented security measures like reCAPTCHA, cutting spam activity by 60%.",
+      "Optimized website performance, improving page load speed by 30%.",
+      "Fixed 20+ bugs and optimized API endpoints, reducing response time by 25%.",
+      "Built Redis-based rate limiting and session caching, improving performance and security.",
+    ],
+    skills: ["AWS", "CI/CD", "Redis", "REST APIs"],
   },
   {
     role: "Frontend Developer",
     company: "People Maketh",
-    period: "May 2024 – Dec 2024",
+    type: "Full-time",
+    period: "May 2024 — Dec 2024",
+    duration: "8 mos",
+    location: "Bengaluru, Karnataka, India",
+    remote: true,
+    logo: "/images/people_maketh_logo.jpeg",
     bullets: [
-      "Integrated 10+ REST APIs into React dashboards, cutting operational verification time by 25%.",
-      "Delivered a reusable component library, reducing UI rebuild time for new features by 35%.",
+      "Developed a user-friendly clinic website with React and Material UI, boosting patient engagement.",
+      "Implemented user validation with Axios for secure data handling and a better experience.",
+      "Contributed to 25% growth in patient interactions with a welcoming digital environment.",
     ],
+    skills: ["React", "Material UI", "Axios"],
+  },
+  {
+    role: "Frontend Developer",
+    company: "LawCrats",
+    type: "Full-time",
+    period: "Aug 2024 — Sep 2024",
+    duration: "2 mos",
+    location: "India",
+    remote: true,
+    bullets: [
+      "Led the design of a legal-resolutions platform serving 5,000 users (React, Material UI).",
+      "Introduced code standards that lifted team productivity by 25%.",
+      "Improved company websites' SEO performance by 35%.",
+    ],
+    skills: ["React", "Material UI", "SEO"],
   },
 ];
 
