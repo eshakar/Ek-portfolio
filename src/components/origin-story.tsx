@@ -1,14 +1,28 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { BurstBadge } from "@/components/burst-badge";
 import { Mascot } from "@/components/mascot";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 const spring = { type: "spring" as const, stiffness: 120, damping: 14 };
+
+/* Clicking the coffee button doesn't take money — it just says thanks, loudly. */
+const COFFEE_REPLIES = [
+  "Thanks for even THINKING about it — my cat just purred in gratitude. 🐱",
+  "Aww, you almost paid for caffeine! That's basically a hug with a price tag.",
+  "Payment declined by me. Your good vibes already cleared the transaction. ✨",
+  "The thought alone gave me +10 XP. No wallet harmed in the process.",
+  "Cold coffee acquired… emotionally. That counts, right?",
+  "You clicked. I felt it. Somewhere a deploy just passed CI. 🚀",
+  "Kind gesture detected. Converting to serotonin… done. ☕",
+  "No payment needed — but I'm framing this click as fan mail.",
+  "Sweet of you! Save the money, send me a bug report instead. 🐛",
+  "Error 402: Payment Not Required. Wholesomeness accepted instead.",
+];
 
 /* A little twinkling star for anime sparkle. */
 function Sparkle({
@@ -79,6 +93,116 @@ function Panel({
         {children}
       </p>
     </motion.article>
+  );
+}
+
+/* The "Buy me cold coffee" button. It takes no money — it pops a comic speech
+   bubble thanking you for the thought, cycling a new line on every click. */
+function CoffeeInteraction() {
+  const [replyIndex, setReplyIndex] = useState<number | null>(null);
+  // -1 until the first click, which seeds a random starting line.
+  const nextRef = useRef(-1);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
+
+  function pour() {
+    if (nextRef.current < 0) {
+      nextRef.current = Math.floor(Math.random() * COFFEE_REPLIES.length);
+    }
+    setReplyIndex(nextRef.current);
+    nextRef.current = (nextRef.current + 1) % COFFEE_REPLIES.length;
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => setReplyIndex(null), 6000);
+  }
+
+  return (
+    <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 w-full max-w-5xl mx-auto">
+      {/* 1. BUTTON (Left on desktop, Top on mobile) */}
+      <div className="flex-1 flex sm:justify-end">
+        <motion.button
+          type="button"
+          onClick={pour}
+          whileTap={{ scale: 0.95 }}
+          aria-label="Buy me cold coffee"
+          className="relative cursor-pointer overflow-hidden rounded-full border-2 border-ink bg-band px-8 py-4 shadow-[6px_6px_0_0_var(--accent-500)] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-[2px_2px_0_0_var(--accent-500)] active:shadow-none"
+        >
+          <div className="speed-lines absolute inset-0 opacity-20" aria-hidden />
+          <div className="relative z-10 flex items-center gap-3">
+            <motion.span
+              className="text-xl"
+              animate={replyIndex !== null ? { rotate: [0, -18, 14, 0] } : {}}
+              transition={{ duration: 0.6 }}
+            >
+              🧋
+            </motion.span>
+            <span className="font-comic text-lg font-bold tracking-wide text-band-foreground sm:text-xl whitespace-nowrap">
+              Buy me cold coffee!
+            </span>
+          </div>
+        </motion.button>
+      </div>
+
+      {/* 2. CAT (Middle) */}
+      <div className="relative w-48 h-48 sm:w-56 sm:h-56 shrink-0 group">
+        <div className="absolute inset-0 rounded-full bg-accent-500/20 blur-2xl transition-all duration-500 group-hover:bg-accent-500/40 group-hover:scale-110" />
+        <DotLottieReact
+          src="/images/Boba Neko.lottie"
+          loop
+          autoplay
+          className="relative z-10 w-full h-full drop-shadow-xl transition-transform duration-300 group-hover:-translate-y-2"
+        />
+      </div>
+
+      {/* 3. MESSAGE (Right on desktop, Bottom on mobile) */}
+      <div className="flex-1 flex sm:justify-start min-h-[120px] sm:min-h-[auto] items-center">
+        <AnimatePresence mode="wait">
+          {replyIndex !== null && (
+            <motion.div
+              key={replyIndex}
+              initial={{ opacity: 0, x: -20, scale: 0.8, rotate: -4 }}
+              animate={{ opacity: 1, x: 0, scale: 1, rotate: 2 }}
+              exit={{ opacity: 0, x: -10, scale: 0.85 }}
+              transition={spring}
+              className="w-[17rem] sm:w-[20rem] relative z-20"
+            >
+              <div
+                role="status"
+                aria-live="polite"
+                className="relative border-2 border-ink bg-card px-5 py-4 text-center shadow-[6px_6px_0_0_var(--accent-500)]"
+              >
+                <p className="font-comic text-base leading-snug text-ink sm:text-lg">
+                  {COFFEE_REPLIES[replyIndex]}
+                </p>
+                {/* the bubble tail, pointing left toward the cat (on desktop) or up (on mobile) */}
+                <span
+                  aria-hidden
+                  className="hidden sm:block absolute right-full top-1/2 -mt-3 h-0 w-0 border-y-[12px] border-r-[14px] border-y-transparent border-r-ink"
+                />
+                <span
+                  aria-hidden
+                  className="hidden sm:block absolute right-full top-1/2 -mt-2 h-0 w-0 border-y-[8px] border-r-[10px] border-y-transparent border-r-card"
+                />
+                
+                {/* tail pointing up for mobile layout */}
+                <span
+                  aria-hidden
+                  className="sm:hidden absolute bottom-full left-1/2 -ml-3 h-0 w-0 border-x-[12px] border-b-[14px] border-x-transparent border-b-ink"
+                />
+                <span
+                  aria-hidden
+                  className="sm:hidden absolute bottom-full left-1/2 -ml-2 h-0 w-0 border-x-[8px] border-b-[10px] border-x-transparent border-b-card"
+                />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
   );
 }
 
@@ -201,35 +325,8 @@ export function OriginStory() {
           transition={{ duration: 0.5 }}
           className="mt-8 flex flex-col items-center gap-12"
         >
-          {/* Boba Neko Lottie & interactive button */}
-          <div className="flex flex-col items-center gap-4 relative group">
-            <div className="relative w-48 h-48 sm:w-56 sm:h-56">
-              {/* aesthetic glow behind the lottie */}
-              <div className="absolute inset-0 rounded-full bg-accent-500/20 blur-2xl transition-all duration-500 group-hover:bg-accent-500/40 group-hover:scale-110" />
-              <DotLottieReact
-                src="/images/Boba Neko.lottie"
-                loop
-                autoplay
-                className="relative z-10 w-full h-full drop-shadow-xl transition-transform duration-300 group-hover:-translate-y-2"
-              />
-            </div>
-            
-            {/* The Buy me a cold coffee aesthetic button */}
-            <Link
-              href="https://buymeacoffee.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative overflow-hidden rounded-full border-2 border-ink bg-band px-8 py-4 shadow-[6px_6px_0_0_var(--accent-500)] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-[2px_2px_0_0_var(--accent-500)] active:shadow-none"
-            >
-              <div className="speed-lines absolute inset-0 opacity-20" aria-hidden />
-              <div className="relative z-10 flex items-center gap-3">
-                <span className="text-xl">🧋</span>
-                <span className="font-comic text-lg font-bold tracking-wide text-band-foreground sm:text-xl">
-                  Buy me cold coffee!
-                </span>
-              </div>
-            </Link>
-          </div>
+          {/* Boba Neko Lottie & interactive button (now rendered together in a 3-col layout) */}
+          <CoffeeInteraction />
 
           {/* the call to action */}
           <div className="flex flex-col items-center gap-4">
