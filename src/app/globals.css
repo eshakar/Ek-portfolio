@@ -1,26 +1,309 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: #f7f1e6;
+  --paper-alt: #efe5d3;
+  --ink: #1c1712;
+  --ink-muted: #6f6255;
+  --band: #16110f;
+  --band-foreground: #f7f1e6;
+  --rule: #ddcfb6;
+  --card: #fffbf2;
+
+  --accent-50: #fff0f4;
+  --accent-100: #ffe1ea;
+  --accent-200: #ffc2d4;
+  --accent-300: #ff9dbb;
+  --accent-400: #ff74a1;
+  --accent-500: #e0316b;
+  --accent-600: #b82256;
+  --accent-700: #8f1c45;
+  --accent-800: #5c1530;
+  --accent-900: #2e0a18;
+}
+
+.dark {
+  --paper: #0c0a09;
+  --paper-alt: #161210;
+  --ink: #f3ece0;
+  --ink-muted: #a89b8b;
+  --band: #f3ece0;
+  --band-foreground: #16110f;
+  --rule: #33291f;
+  --card: #171310;
+
+  --accent-50: #2e0a18;
+  --accent-100: #5c1530;
+  --accent-200: #8f1c45;
+  --accent-300: #b82256;
+  --accent-400: #e0316b;
+  --accent-500: #ff6fa0;
+  --accent-600: #ff9dbb;
+  --accent-700: #ffc2d4;
+  --accent-800: #ffe1ea;
+  --accent-900: #fff0f4;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-paper: var(--paper);
+  --color-paper-alt: var(--paper-alt);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-band: var(--band);
+  --color-band-foreground: var(--band-foreground);
+  --color-rule: var(--rule);
+  --color-card: var(--card);
+
+  --color-accent-50: var(--accent-50);
+  --color-accent-100: var(--accent-100);
+  --color-accent-200: var(--accent-200);
+  --color-accent-300: var(--accent-300);
+  --color-accent-400: var(--accent-400);
+  --color-accent-500: var(--accent-500);
+  --color-accent-600: var(--accent-600);
+  --color-accent-700: var(--accent-700);
+  --color-accent-800: var(--accent-800);
+  --color-accent-900: var(--accent-900);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-comic: var(--font-bangers);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
+
+.paper-texture {
+  background-image:
+    radial-gradient(var(--rule) 0.6px, transparent 0.6px),
+    radial-gradient(var(--rule) 0.6px, transparent 0.6px);
+  background-size: 26px 26px;
+  background-position:
+    0 0,
+    13px 13px;
+  background-color: var(--paper);
+  opacity: 1;
+}
+
+.dark .paper-texture {
+  background-image:
+    radial-gradient(var(--rule) 0.6px, transparent 0.6px),
+    radial-gradient(var(--rule) 0.6px, transparent 0.6px);
+}
+
+@keyframes particle-fall {
+  0% {
+    transform: translateY(-10vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: var(--particle-opacity, 0.85);
+  }
+  85% {
+    opacity: var(--particle-opacity, 0.85);
+  }
+  100% {
+    transform: translateY(110vh) translateX(var(--drift, 40px)) rotate(var(--spin, 220deg));
+    opacity: 0;
+  }
+}
+
+@keyframes rain-fall {
+  0% {
+    transform: translateY(-10vh) translateX(0px) scaleY(1);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.7;
+  }
+  92% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(110vh) translateX(var(--drift, 30px)) scaleY(1.2);
+    opacity: 0;
+  }
+}
+
+@keyframes rain-fall-heavy {
+  0% {
+    transform: translateY(-10vh) translateX(0px);
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.85;
+  }
+  95% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: translateY(110vh) translateX(var(--drift, 40px));
+    opacity: 0;
+  }
+}
+
+@keyframes lightning-flash {
+  0%, 89%, 91%, 93%, 100% {
+    opacity: 0;
+  }
+  90%, 92% {
+    opacity: 0.06;
+  }
+}
+
+.particle {
+  position: absolute;
+  top: -5%;
+  animation-name: particle-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.particle-petal {
+  width: 9px;
+  height: 9px;
+  background: var(--accent-400);
+  border-radius: 0 60% 0 60%;
+}
+
+.particle-snow {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 3px rgba(28, 23, 18, 0.25);
+}
+
+.particle-leaf {
+  width: 10px;
+  height: 8px;
+  background: var(--accent-600);
+  border-radius: 0 70% 0 70%;
+}
+
+.particle-green {
+  width: 10px;
+  height: 8px;
+  background: #4f8f5e;
+  border-radius: 0 70% 0 70%;
+}
+
+.dark .particle-green {
+  background: #6db47d;
+}
+
+.particle-rain {
+  width: 1.5px;
+  height: 22px;
+  background: linear-gradient(
+    to bottom,
+    rgba(180, 210, 230, 0),
+    rgba(180, 210, 230, 0.75) 40%,
+    rgba(210, 235, 255, 0.9) 70%,
+    rgba(180, 210, 230, 0.4)
+  );
+  border-radius: 0 0 50% 50%;
+  transform: rotate(10deg);
+  animation-name: rain-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  filter: blur(0.3px);
+}
+
+.particle-rain:nth-child(3n) {
+  width: 1px;
+  height: 28px;
+  animation-name: rain-fall-heavy;
+  animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  opacity: 0.85;
+}
+
+.particle-rain:nth-child(5n) {
+  width: 2px;
+  height: 18px;
+  opacity: 0.5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .particle,
+  .particle-rain {
+    display: none;
+  }
+}
+
+.halftone {
+  background-image: radial-gradient(var(--accent-500) 1.6px, transparent 1.6px);
+  background-size: 14px 14px;
+  opacity: 0.16;
+}
+
+.speed-lines {
+  background: repeating-conic-gradient(
+    from 0deg,
+    var(--ink) 0deg 1.2deg,
+    transparent 1.2deg 9deg
+  );
+  opacity: 0.06;
+  mask-image: radial-gradient(circle, black 0%, transparent 72%);
+  -webkit-mask-image: radial-gradient(circle, black 0%, transparent 72%);
+}
+
+/* Slow, faint ambient light drift for the cinematic inner sections. */
+@keyframes ambient-drift {
+  0% {
+    transform: translate3d(-4%, -3%, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(4%, 3%, 0) scale(1.12);
+  }
+  100% {
+    transform: translate3d(-4%, -3%, 0) scale(1);
+  }
+}
+
+@keyframes ambient-drift-slow {
+  0% {
+    transform: translate3d(3%, 2%, 0) scale(1.06);
+  }
+  50% {
+    transform: translate3d(-3%, -4%, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(3%, 2%, 0) scale(1.06);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-drift,
+  .ambient-drift-slow {
+    animation: none !important;
+  }
+}
+
+@keyframes pop-in {
+  0% {
+    transform: scale(0.6) rotate(-8deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.08) rotate(4deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(-4deg);
+    opacity: 1;
+  }
+}
+
+.comic-pop {
+  animation: pop-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
