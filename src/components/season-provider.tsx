@@ -23,6 +23,7 @@ export function useSeason() {
 }
 
 const STORAGE_KEY = "esha-season";
+const FALLBACK_ACCENT = "#ff8fb3";
 
 /* Builds the full accent scale from a single season colour, matching the
    dark-theme direction (higher number = lighter, lower = darker). Overriding
@@ -39,6 +40,15 @@ function accentVars(base: string): React.CSSProperties {
     "--accent-200": `color-mix(in srgb, ${base} 44%, black)`,
     "--accent-100": `color-mix(in srgb, ${base} 28%, black)`,
   } as React.CSSProperties;
+}
+
+/* The accent scale lives as inline styles on the wrapper below, so anything
+   portalled out of it (dialogs rendered into <body>) inherits the stock pink
+   from :root instead of the season colour. Those roots re-apply it with this. */
+export function useAccentVars(): React.CSSProperties {
+  const { season } = useSeason();
+  const base = seasons.find((s) => s.id === season)?.accent ?? FALLBACK_ACCENT;
+  return accentVars(base);
 }
 
 export function SeasonProvider({ children }: { children: ReactNode }) {
@@ -59,7 +69,7 @@ export function SeasonProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const base = seasons.find((s) => s.id === season)?.accent ?? "#ff8fb3";
+  const base = seasons.find((s) => s.id === season)?.accent ?? FALLBACK_ACCENT;
 
   return (
     <SeasonContext.Provider value={{ season, setSeason }}>

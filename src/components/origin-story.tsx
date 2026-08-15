@@ -121,9 +121,11 @@ function CoffeeInteraction() {
   }
 
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 w-full max-w-5xl mx-auto">
+    /* Both side columns get the SAME fixed width so the cat stays dead centre
+       whether or not a reply bubble is showing. */
+    <div className="mx-auto flex w-full max-w-5xl flex-col items-center justify-center gap-5 sm:flex-row sm:gap-8">
       {/* 1. BUTTON (Left on desktop, Top on mobile) */}
-      <div className="flex-1 flex sm:justify-end">
+      <div className="flex w-full flex-col items-center gap-2 sm:w-[19rem] sm:shrink-0 sm:items-end">
         <motion.button
           type="button"
           onClick={pour}
@@ -145,21 +147,40 @@ function CoffeeInteraction() {
             </span>
           </div>
         </motion.button>
+
+        {/* nudge, until they've clicked once */}
+        <AnimatePresence>
+          {replyIndex === null && (
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0.45, 1, 0.45] }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+              className="font-mono text-[10px] tracking-[0.2em] text-ink-muted uppercase"
+            >
+              go on, press it
+            </motion.span>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* 2. CAT (Middle) */}
-      <div className="relative w-48 h-48 sm:w-56 sm:h-56 shrink-0 group">
-        <div className="absolute inset-0 rounded-full bg-accent-500/20 blur-2xl transition-all duration-500 group-hover:bg-accent-500/40 group-hover:scale-110" />
+      <motion.div
+        className="group relative h-48 w-48 shrink-0 sm:h-56 sm:w-56"
+        animate={replyIndex !== null ? { y: [0, -16, 0, -6, 0] } : {}}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+      >
+        <div className="absolute inset-0 rounded-full bg-accent-500/20 blur-2xl transition-all duration-500 group-hover:scale-110 group-hover:bg-accent-500/40" />
         <DotLottieReact
           src="/images/Boba Neko.lottie"
           loop
           autoplay
-          className="relative z-10 w-full h-full drop-shadow-xl transition-transform duration-300 group-hover:-translate-y-2"
+          className="relative z-10 h-full w-full drop-shadow-xl transition-transform duration-300 group-hover:-translate-y-2"
         />
-      </div>
+      </motion.div>
 
       {/* 3. MESSAGE (Right on desktop, Bottom on mobile) */}
-      <div className="flex-1 flex sm:justify-start min-h-[120px] sm:min-h-[auto] items-center">
+      <div className="flex min-h-[7.5rem] w-full items-center justify-center sm:w-[19rem] sm:shrink-0 sm:justify-start">
         <AnimatePresence mode="wait">
           {replyIndex !== null && (
             <motion.div
@@ -168,7 +189,7 @@ function CoffeeInteraction() {
               animate={{ opacity: 1, x: 0, scale: 1, rotate: 2 }}
               exit={{ opacity: 0, x: -10, scale: 0.85 }}
               transition={spring}
-              className="w-[17rem] sm:w-[20rem] relative z-20"
+              className="relative z-20 w-[17rem] sm:w-full"
             >
               <div
                 role="status"

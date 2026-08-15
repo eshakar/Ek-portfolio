@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Download } from "lucide-react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { contact } from "@/data/resume";
+import { ResumeModal } from "@/components/resume-modal";
 
 const links = [
   { href: "/", label: "Home" },
@@ -23,6 +24,7 @@ export function Nav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [resumeHovered, setResumeHovered] = useState(false);
+  const [resumeModalOpen, setResumeModalOpen] = useState(false);
 
   const headerRef = useRef<HTMLDivElement>(null);
   const homeAnchorRef = useRef<HTMLSpanElement>(null);
@@ -98,10 +100,9 @@ export function Nav() {
               Esha Kar
             </Link>
 
-            {/* resume download, right after the name */}
-            <a
-              href={contact.resume}
-              download
+            {/* resume download button */}
+            <button
+              onClick={() => setResumeModalOpen(true)}
               onMouseEnter={() => setResumeHovered(true)}
               onMouseLeave={() => setResumeHovered(false)}
               className="group inline-flex items-center gap-1.5 border-2 border-ink bg-band px-3 py-1.5 font-mono text-[10px] font-bold tracking-[0.15em] text-band-foreground uppercase shadow-[3px_3px_0_0_var(--accent-500)] transition-transform hover:-translate-y-0.5"
@@ -111,7 +112,7 @@ export function Nav() {
                 className="transition-transform group-hover:translate-y-0.5"
               />
               Resume
-            </a>
+            </button>
 
             {/* landing spot for the cat when the resume is hovered */}
             <span
@@ -190,6 +191,8 @@ export function Nav() {
           </motion.nav>
         )}
       </AnimatePresence>
+
+      <ResumeModal isOpen={resumeModalOpen} onClose={() => setResumeModalOpen(false)} />
     </header>
   );
 }
