@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Download, Zap } from "lucide-react";
 import { contact } from "@/data/resume";
-import { useAccentVars } from "@/components/season-provider";
+import { useAccentVars, useSeason } from "@/components/season-provider";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -23,6 +23,7 @@ export function ResumeModal({
   const [status, setStatus] = useState<Status>("idle");
   // Portalled to <body>, so the season's accent scale has to come along.
   const accentVars = useAccentVars();
+  const { season } = useSeason();
 
   /* Esc closes, and the page behind stays put while the dialog is up. */
   useEffect(() => {
@@ -72,7 +73,7 @@ export function ResumeModal({
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "resume", name, email }),
+        body: JSON.stringify({ type: "resume", name, email, season }),
       });
       if (!res.ok) throw new Error("Failed");
 

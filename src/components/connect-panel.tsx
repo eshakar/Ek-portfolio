@@ -5,6 +5,7 @@ import { Mail, Download } from "lucide-react";
 import { GithubIcon, LinkedinIcon, YoutubeIcon } from "@/components/social-icons";
 import { contact } from "@/data/resume";
 import { ResumeModal } from "@/components/resume-modal";
+import { useSeason } from "@/components/season-provider";
 
 const links = [
   { icon: Mail, label: "Email", value: contact.email, href: `mailto:${contact.email}` },
@@ -19,6 +20,7 @@ export function ConnectPanel() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const { season } = useSeason();
 
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,7 +29,7 @@ export function ConnectPanel() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "contact", name, email, message }),
+        body: JSON.stringify({ type: "contact", name, email, message, season }),
       });
       if (!res.ok) throw new Error("Failed");
       setStatus("success");
