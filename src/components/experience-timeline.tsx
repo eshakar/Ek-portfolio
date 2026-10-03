@@ -140,7 +140,7 @@ export function ExperienceTimeline() {
             The Record
           </motion.h1>
           <p className="relative mt-5 font-mono text-[11px] tracking-[0.15em] text-ink-muted">
-            Six teams · remote-first ·{" "}
+            Four teams · remote-first ·{" "}
             <span className="text-accent-500">always shipping</span>.
           </p>
         </motion.header>
