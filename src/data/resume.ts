@@ -5,12 +5,16 @@ import {
   Database,
   ClipboardCheck,
   Wrench,
+  Cloud,
+  Radio,
+  CreditCard,
+  Brain,
   type LucideIcon,
 } from "lucide-react";
 
 export const contact = {
   name: "Esha Kar",
-  role: "Full Stack Engineer",
+  role: "Senior Full Stack AI-Native Developer",
   location: "Kolkata, India",
   email: "esha.kar20@gmail.com",
   phone: "+91-9932275231",
@@ -35,27 +39,47 @@ export const skillGroups: SkillGroup[] = [
   {
     icon: LayoutPanelLeft,
     label: "Frontend",
-    items: ["React.js", "Next.js", "Tailwind CSS", "Material UI", "Redux Toolkit"],
+    items: ["React.js", "Next.js", "Angular", "Tailwind CSS", "Three.js", "GSAP"],
   },
   {
     icon: Server,
     label: "Backend & APIs",
-    items: ["Node.js", "Express.js", "Nest.js", "REST API design", "JWT Auth", "Rate Limiting"],
+    items: ["Node.js", "Nest.js", "Express.js", "Django", "FastAPI", "REST", "JWT"],
+  },
+  {
+    icon: Brain,
+    label: "AI & Data",
+    items: ["RAG Pipelines", "LangChain", "Gemini API", "ChatGPT API", "Vector DBs"],
+  },
+  {
+    icon: Radio,
+    label: "Real-time & SDKs",
+    items: ["LiveKit SDK", "Amazon Chime SDK", "Firebase Realtime DB", "WebSockets"],
+  },
+  {
+    icon: CreditCard,
+    label: "Payments & Integrations",
+    items: ["Razorpay", "Payment Gateway Integration", "Webhooks", "E-Commerce APIs"],
   },
   {
     icon: Database,
-    label: "Data & Performance",
-    items: ["MongoDB", "Redis (caching, sessions)", "TanStack Query", "Query Optimization"],
+    label: "Databases",
+    items: ["MongoDB", "PostgreSQL", "MySQL", "Redis"],
+  },
+  {
+    icon: Cloud,
+    label: "Infra & DevOps",
+    items: ["VPS", "Cloudflare (CDN/DNS)", "Domain Management", "CI/CD Pipelines"],
   },
   {
     icon: ClipboardCheck,
     label: "Practices",
-    items: ["Component-based architecture", "Code reviews", "Sprint-based delivery", "Production debugging"],
+    items: ["TanStack Query", "Query Optimisation", "Component Architecture", "Production Debugging"],
   },
   {
     icon: Wrench,
     label: "Tools",
-    items: ["Git", "GitHub", "Postman", "Netlify", "Figma"],
+    items: ["Git", "GitHub", "Postman", "Figma", "Netlify"],
   },
 ];
 
@@ -68,46 +92,39 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    title: "AI-Powered Resume Analyzer & Interview Prep",
+    title: "AI Resume Analyzer & Interview Prep",
     tagline:
-      "Gemini-powered analyzer generating role-specific interview questions and skill-gap scores in under 3s, at 300+ requests sub-500ms.",
+      "Gemini API-powered app generating role-specific interview questions — cuts prep time by 60%. Scoring engine returns ranked skill gaps in under 3s, handling 300+ requests at sub-500ms.",
     tags: ["Gemini API", "Node.js", "Express", "MongoDB"],
     href: "https://resume-analyzer-taupe-five.vercel.app/",
   },
   {
     title: "MERN Notes App",
     tagline:
-      "Production notes app handling 500+ daily requests — full CRUD, JWT auth, and Redis caching cut server load by 30%.",
-    tags: ["MongoDB", "Express", "React", "Redis", "JWT"],
+      "Handles 500+ daily requests — Redis caching cut server load by 30% and indexing cut response time by 20%.",
+    tags: ["MongoDB", "Express", "React", "Node.js", "Redis"],
     href: "https://frontend-2-ih6w.onrender.com/",
   },
   {
-    title: "Dogs Studio",
+    title: "Dogs Studio — 3D Interactive Experience",
     tagline:
-      "Immersive 3D experience with Three.js and GSAP — scroll-linked animation sequences synced to 3D model states.",
-    tags: ["Three.js", "GSAP", "React.js"],
+      "Immersive Three.js + GSAP experience with ScrollTrigger-linked 3D animation sequences.",
+    tags: ["Three.js", "GSAP", "ScrollTrigger", "React.js"],
     href: "https://react-dog-tau.vercel.app/",
-  },
-  {
-    title: "AI Spoken English Platform — Tutopia",
-    tagline:
-      "Production AI spoken-English coach with ChatGPT-powered real-time conversation feedback and pronunciation coaching.",
-    tags: ["Next.js", "TypeScript", "ChatGPT API", "TanStack Query"],
-    href: "https://ai.tutopia.in/",
-  },
-  {
-    title: "Drag & Drop Page Builder",
-    tagline:
-      "CMS-style page builder with react-dnd, undo/redo history, and 12 draggable component types — live property editing, no reload.",
-    tags: ["React", "react-dnd", "Redux Toolkit"],
-    href: "https://drag-drop-dun-zeta.vercel.app/",
   },
   {
     title: "Avatar Development",
     tagline:
-      "Interactive avatar rendering app in React — dynamic customization with a real-time preview as you tweak every detail.",
-    tags: ["React", "JavaScript", "UI"],
+      "Interactive avatar rendering app in React, exploring dynamic customization and real-time preview.",
+    tags: ["React.js", "JavaScript"],
     href: "https://avatar-development.vercel.app/",
+  },
+  {
+    title: "LabNest (Freelance · In Progress)",
+    tagline:
+      "Lab management platform under active development — owning frontend architecture, component design, and API integration.",
+    tags: ["Next.js", "React.js", "REST APIs"],
+    href: "https://labnest-self.vercel.app/",
   },
 ];
 

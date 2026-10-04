@@ -82,8 +82,8 @@ const notoDevanagari = Noto_Sans_Devanagari({
 });
 
 export const metadata: Metadata = {
-  title: "Esha Kar | Full Stack Engineer",
-  description: "Full Stack Engineer — React, Node.js, Redis, TypeScript.",
+  title: "Esha Kar | Senior Full Stack AI-Native Developer",
+  description: "Senior Full Stack AI-Native Developer — Next.js, Angular, Nest.js, AI integration.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
