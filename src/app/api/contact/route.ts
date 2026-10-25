@@ -9,6 +9,7 @@ import {
   resumeVisitorEmail,
   type MascotId,
 } from "@/emails/template";
+import { recordDownload } from "@/lib/stats";
 
 /* The mascot GIFs are attached by CID rather than linked, so they render
    without the recipient having to allow remote images. next.config.ts adds
@@ -88,6 +89,13 @@ export async function POST(req: Request) {
         attachments: [mascot],
       }),
     ]);
+
+    // A stats hiccup shouldn't fail a download whose emails already went out.
+    if (isResume) {
+      await recordDownload("email", { name, email }).catch((err) =>
+        console.error("Download stats:", err),
+      );
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {

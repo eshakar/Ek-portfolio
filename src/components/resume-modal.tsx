@@ -56,9 +56,16 @@ export function ResumeModal({
   }, [isOpen]);
 
   /* Custom events only show in Vercel Web Analytics on the Pro plan; on
-     Hobby they are dropped, so this is harmless until an upgrade. */
+     Hobby they are dropped, so this is harmless until an upgrade. The free
+     /stats count comes from /api/download here and /api/contact for the
+     email path. */
   function directDownload(path: "direct" | "email") {
     track("Resume Download", { path });
+    if (path === "direct") {
+      fetch("/api/download", { method: "POST", keepalive: true }).catch(
+        () => {},
+      );
+    }
     const link = document.createElement("a");
     link.href = contact.resume;
     link.download = "Esha_Kar_Resume.pdf";
