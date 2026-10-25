@@ -1,40 +1,37 @@
 import type { Metadata } from "next";
-import {
-  Geist,
-  Geist_Mono,
-  Bangers,
-  Caveat,
-  Fraunces,
-  Noto_Sans_Bengali,
-  Noto_Sans_Devanagari,
-  Noto_Serif_Bengali,
-  Noto_Serif_Devanagari,
-} from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { Nav } from "@/components/nav";
 import { SeasonProvider } from "@/components/season-provider";
 
-const geistSans = Geist({
+/* Fonts are self-hosted from the @fontsource packages instead of
+   next/font/google: Turbopack's Google font loader fails the build when
+   Google Fonts returns extensionless URLs (vercel/next.js#99114), and this
+   also removes the build's dependency on fonts.gstatic.com. */
+
+const geistSans = localFont({
   variable: "--font-geist-sans",
-  subsets: ["latin"],
+  src: "../../node_modules/@fontsource-variable/geist/files/geist-latin-wght-normal.woff2",
+  weight: "100 900",
 });
 
-const geistMono = Geist_Mono({
+const geistMono = localFont({
   variable: "--font-geist-mono",
-  subsets: ["latin"],
+  src: "../../node_modules/@fontsource-variable/geist-mono/files/geist-mono-latin-wght-normal.woff2",
+  weight: "100 900",
 });
 
-const bangers = Bangers({
+const bangers = localFont({
   variable: "--font-bangers",
-  subsets: ["latin"],
+  src: "../../node_modules/@fontsource/bangers/files/bangers-latin-400-normal.woff2",
   weight: "400",
 });
 
 /* Handwriting face for the "pencil note" story that writes itself in. */
-const caveat = Caveat({
+const caveat = localFont({
   variable: "--font-caveat",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  src: "../../node_modules/@fontsource-variable/caveat/files/caveat-latin-wght-normal.woff2",
+  weight: "400 700",
   display: "swap",
 });
 
@@ -42,42 +39,51 @@ const caveat = Caveat({
    identity mark. English uses Fraunces; the Indic scripts use matching Noto
    Serif faces; Japanese falls back to the system Mincho stack (see
    name-intro.tsx). Only the homepage hero uses these — /about is unchanged. */
-const fraunces = Fraunces({
+const fraunces = localFont({
   variable: "--font-fraunces",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
+  src: [
+    {
+      path: "../../node_modules/@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2",
+      weight: "100 900",
+      style: "normal",
+    },
+    {
+      path: "../../node_modules/@fontsource-variable/fraunces/files/fraunces-latin-wght-italic.woff2",
+      weight: "100 900",
+      style: "italic",
+    },
+  ],
   display: "swap",
 });
 
-const serifBengali = Noto_Serif_Bengali({
+const serifBengali = localFont({
   variable: "--font-serif-bn",
-  subsets: ["bengali"],
-  weight: ["500", "600"],
+  src: "../../node_modules/@fontsource-variable/noto-serif-bengali/files/noto-serif-bengali-bengali-wght-normal.woff2",
+  weight: "100 900",
   display: "swap",
 });
 
-const serifDevanagari = Noto_Serif_Devanagari({
+const serifDevanagari = localFont({
   variable: "--font-serif-hi",
-  subsets: ["devanagari"],
-  weight: ["500", "600"],
+  src: "../../node_modules/@fontsource-variable/noto-serif-devanagari/files/noto-serif-devanagari-devanagari-wght-normal.woff2",
+  weight: "100 900",
   display: "swap",
 });
 
 /* Scripts for the multilingual name intro. Indic subsets are small and
    preload cleanly. Japanese is left to the system CJK stack (see
    name-intro.tsx) — the Noto CJK face is too large to bundle here. */
-const notoBengali = Noto_Sans_Bengali({
+const notoBengali = localFont({
   variable: "--font-noto-bengali",
-  subsets: ["bengali"],
-  weight: ["600", "700"],
+  src: "../../node_modules/@fontsource-variable/noto-sans-bengali/files/noto-sans-bengali-bengali-wght-normal.woff2",
+  weight: "100 900",
   display: "swap",
 });
 
-const notoDevanagari = Noto_Sans_Devanagari({
+const notoDevanagari = localFont({
   variable: "--font-noto-devanagari",
-  subsets: ["devanagari"],
-  weight: ["600", "700"],
+  src: "../../node_modules/@fontsource-variable/noto-sans-devanagari/files/noto-sans-devanagari-devanagari-wght-normal.woff2",
+  weight: "100 900",
   display: "swap",
 });
 
