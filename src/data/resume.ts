@@ -88,9 +88,25 @@ export type Project = {
   tagline: string;
   tags: string[];
   href: string;
+  repo?: string;
 };
 
 export const projects: Project[] = [
+  {
+    title: "Jana Human Hair (House of Jana Ventures)",
+    tagline:
+      "Company site for a Midnapore-based natural human hair manufacturer exporting to four continents. It showcases the wefts, extensions and wigs range and channels B2B visitors into a bulk-inquiry flow for wig makers and salons.",
+    tags: ["Next.js", "React.js", "Vercel", "SEO"],
+    href: "https://janahumanhair.com/",
+  },
+  {
+    title: "Agent Eval — Agentic AI Evaluation",
+    tagline:
+      "An exam system for AI agents: runs Claude and Gemini agents over question datasets, records each answer, tool call, latency and token count, then scores them with rule-based checks and an LLM-as-judge. Every run becomes a report card in the dashboard.",
+    tags: ["FastAPI", "Next.js", "Claude API", "Gemini API", "LLM-as-Judge"],
+    href: "https://agentic-ai-evaluation-web.vercel.app/",
+    repo: "https://github.com/eshakar/agentic-ai-evaluation",
+  },
   {
     title: "AI Resume Analyzer & Interview Prep",
     tagline:
@@ -156,6 +172,7 @@ export const experience: ExperienceEntry[] = [
       "Haircraft — built an e-commerce platform from scratch as sole full-stack owner.",
       "Owned the project end-to-end — architecture, hosting, domain, VPS, and Cloudflare CDN.",
       "Built the storefront in Next.js and the admin panel in Angular, backed by a Nest.js API layer, with AI capabilities integrated across the platform.",
+      "Jana Human Hair — shipped the company's Next.js site on Vercel, presenting the export product range and routing B2B buyers into a bulk-inquiry flow.",
     ],
     skills: ["Next.js", "Angular", "Nest.js", "Cloudflare", "AI Integration"],
   },

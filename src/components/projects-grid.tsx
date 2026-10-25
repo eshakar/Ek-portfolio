@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { projects } from "@/data/resume";
 import { BurstBadge } from "@/components/burst-badge";
+import { GithubIcon } from "@/components/social-icons";
 import { ComicCloud, cloudMessages } from "@/components/comic-cloud";
 import { RunningLottie } from "@/components/running-lottie";
 
@@ -49,7 +50,7 @@ export function ProjectsGrid() {
           return (
             <div
               key={project.title}
-              className="relative"
+              className="relative flex flex-col"
               onMouseEnter={() => showCloud(i)}
               onMouseLeave={() => setCloud((c) => (c?.index === i ? null : c))}
             >
@@ -84,7 +85,7 @@ export function ProjectsGrid() {
                   zIndex: 10,
                 }}
                 whileTap={{ scale: 0.95, rotate: 0 }}
-                className="group relative flex h-full flex-col justify-between border-2 border-rule bg-paper p-5 shadow-[5px_5px_0_0_var(--rule)] transition-all duration-300 hover:border-accent-500 hover:shadow-[12px_12px_0_0_var(--accent-500)] cursor-pointer"
+                className="group relative flex flex-1 flex-col justify-between border-2 border-rule bg-paper p-5 shadow-[5px_5px_0_0_var(--rule)] transition-all duration-300 hover:border-accent-500 hover:shadow-[12px_12px_0_0_var(--accent-500)] cursor-pointer"
               >
                 {/* Funny hidden speed lines that reveal on hover */}
                 <div
@@ -127,6 +128,20 @@ export function ProjectsGrid() {
                   ))}
                 </div>
               </motion.a>
+
+              {/* The card itself is a link, so the repo link sits under it
+                  rather than nested inside. */}
+              {project.repo && (
+                <a
+                  href={project.repo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-flex items-center gap-1.5 self-start font-mono text-xs font-bold tracking-wide text-ink-muted uppercase transition-colors hover:text-accent-500"
+                >
+                  <GithubIcon className="h-4 w-4" />
+                  View code
+                </a>
+              )}
             </div>
           );
         })}
