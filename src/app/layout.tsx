@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Nav } from "@/components/nav";
 import { SeasonProvider } from "@/components/season-provider";
@@ -104,6 +105,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Nav />
           <div className="relative flex flex-1 flex-col">{children}</div>
         </SeasonProvider>
+        <Analytics />
       </body>
     </html>
   );

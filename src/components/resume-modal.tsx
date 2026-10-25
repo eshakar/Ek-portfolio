@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { track } from "@vercel/analytics";
 import { X, Download, Zap } from "lucide-react";
 import { contact } from "@/data/resume";
 import { useAccentVars, useSeason } from "@/components/season-provider";
@@ -54,7 +55,10 @@ export function ResumeModal({
     return () => clearTimeout(t);
   }, [isOpen]);
 
-  function directDownload() {
+  /* Custom events only show in Vercel Web Analytics on the Pro plan; on
+     Hobby they are dropped, so this is harmless until an upgrade. */
+  function directDownload(path: "direct" | "email") {
+    track("Resume Download", { path });
     const link = document.createElement("a");
     link.href = contact.resume;
     link.download = "Esha_Kar_Resume.pdf";
@@ -78,7 +82,7 @@ export function ResumeModal({
       if (!res.ok) throw new Error("Failed");
 
       setStatus("success");
-      setTimeout(directDownload, 1800);
+      setTimeout(() => directDownload("email"), 1800);
     } catch {
       setStatus("error");
     }
@@ -219,7 +223,7 @@ export function ResumeModal({
                         </span>
                       </div>
                       <button
-                        onClick={directDownload}
+                        onClick={() => directDownload("direct")}
                         className="mt-auto flex w-full cursor-pointer items-center justify-center gap-2 border-2 border-ink bg-transparent px-4 py-2.5 font-mono text-xs font-bold tracking-widest text-ink uppercase shadow-[3px_3px_0_0_var(--ink)] transition-all hover:translate-x-0.5 hover:translate-y-0.5 hover:bg-ink hover:text-paper hover:shadow-none"
                       >
                         <Download size={14} />
