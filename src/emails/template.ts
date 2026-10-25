@@ -17,7 +17,7 @@ const PAPER = "#f7f1e6";
 const CARD = "#fffbf2";
 const INK = "#16110f";
 const MUTED = "#6f6255";
-const SITE = "https://ek-portfolio-one.vercel.app";
+const SITE = "https://ek-portfolio-mocha.vercel.app";
 
 export type MascotId = "boba" | "love";
 
