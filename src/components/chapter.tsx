@@ -33,7 +33,10 @@ export function Chapter({
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
+        /* "some" rather than a fraction: a long chapter (Projects is taller
+           than two screens) can never be 30% in view at once, so it would
+           stay invisible until scrolled into. */
+        viewport={{ once: true, amount: "some" }}
         transition={{ duration: 0.6 }}
         className={`relative z-10 mx-auto w-full border bg-card shadow-[6px_6px_0_0_var(--rule)] ${
           wide ? "max-w-4xl" : "max-w-2xl"
