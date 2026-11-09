@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ShoppingBag } from "lucide-react";
 import { projects } from "@/data/resume";
 import { BurstBadge } from "@/components/burst-badge";
 import { GithubIcon } from "@/components/social-icons";
@@ -129,18 +129,33 @@ export function ProjectsGrid() {
                 </div>
               </motion.a>
 
-              {/* The card itself is a link, so the repo link sits under it
+              {/* The card itself is a link, so extra links sit under it
                   rather than nested inside. */}
-              {project.repo && (
-                <a
-                  href={project.repo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-3 inline-flex items-center gap-1.5 self-start font-mono text-xs font-bold tracking-wide text-ink-muted uppercase transition-colors hover:text-accent-500"
-                >
-                  <GithubIcon className="h-4 w-4" />
-                  View code
-                </a>
+              {(project.store || project.repo) && (
+                <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+                  {project.store && (
+                    <a
+                      href={project.store}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 font-mono text-xs font-bold tracking-wide text-ink-muted uppercase transition-colors hover:text-accent-500"
+                    >
+                      <ShoppingBag size={16} />
+                      Visit store
+                    </a>
+                  )}
+                  {project.repo && (
+                    <a
+                      href={project.repo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 font-mono text-xs font-bold tracking-wide text-ink-muted uppercase transition-colors hover:text-accent-500"
+                    >
+                      <GithubIcon className="h-4 w-4" />
+                      View code
+                    </a>
+                  )}
+                </div>
               )}
             </div>
           );

@@ -89,6 +89,7 @@ export type Project = {
   tags: string[];
   href: string;
   repo?: string;
+  store?: string;
 };
 
 export const projects: Project[] = [
@@ -98,6 +99,14 @@ export const projects: Project[] = [
       "Migrated the company site, domain and DNS off vendor hosting to Next.js on Vercel + Cloudflare, and now building its e-commerce store — Next.js storefront and admin, Nest.js API, PostgreSQL.",
     tags: ["Next.js", "Nest.js", "PostgreSQL", "Vercel", "Cloudflare"],
     href: "https://janahumanhair.com/",
+    store: "https://shop.janahumanhair.com/",
+  },
+  {
+    title: "Haircraft (House of Jana Ventures)",
+    tagline:
+      "E-commerce store for human hair extensions, toppers and wigs, built from scratch as sole full-stack owner — Next.js storefront, Angular admin panel and Nest.js API, with AI features across the platform. Self-hosted on a VPS behind Cloudflare CDN.",
+    tags: ["Next.js", "Angular", "Nest.js", "VPS", "Cloudflare", "AI Integration"],
+    href: "https://shop.haircraft.in/",
   },
   {
     title: "SaaSquatch Pro — AI Lead Intelligence",
