@@ -68,8 +68,8 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     icon: Cloud,
-    label: "Infra & DevOps",
-    items: ["VPS", "Cloudflare (CDN/DNS)", "Domain Management", "CI/CD Pipelines"],
+    label: "Cloud & DevOps",
+    items: ["AWS (EC2, S3, RDS)", "VPS", "Cloudflare (CDN/DNS)", "Domain Management", "CI/CD Pipelines"],
   },
   {
     icon: ClipboardCheck,
@@ -79,7 +79,7 @@ export const skillGroups: SkillGroup[] = [
   {
     icon: Wrench,
     label: "Tools",
-    items: ["Git", "GitHub", "Postman", "Figma", "Netlify"],
+    items: ["Docker", "Git", "GitHub", "Postman", "Figma", "Netlify"],
   },
 ];
 
@@ -95,15 +95,23 @@ export const projects: Project[] = [
   {
     title: "Jana Human Hair (House of Jana Ventures)",
     tagline:
-      "Company site for a Midnapore-based natural human hair manufacturer exporting to four continents. It showcases the wefts, extensions and wigs range and channels B2B visitors into a bulk-inquiry flow for wig makers and salons.",
-    tags: ["Next.js", "React.js", "Vercel", "SEO"],
+      "Migrated the company site, domain and DNS off vendor hosting to Next.js on Vercel + Cloudflare, and now building its e-commerce store — Next.js storefront and admin, Nest.js API, PostgreSQL.",
+    tags: ["Next.js", "Nest.js", "PostgreSQL", "Vercel", "Cloudflare"],
     href: "https://janahumanhair.com/",
+  },
+  {
+    title: "SaaSquatch Pro — AI Lead Intelligence",
+    tagline:
+      "Explainable 0–100 deal scoring plus an AI outreach copilot, grounded only in scraped facts. Dockerised with CI and 24 tests, deployed on AWS EC2.",
+    tags: ["FastAPI", "PostgreSQL", "Next.js", "Docker", "AWS EC2"],
+    href: "https://3-7-47-162.sslip.io/",
+    repo: "https://github.com/eshakar/caprae-leading-tool-assignment",
   },
   {
     title: "Agent Eval — Agentic AI Evaluation",
     tagline:
-      "An exam system for AI agents: runs Claude and Gemini agents over question datasets, records each answer, tool call, latency and token count, then scores them with rule-based checks and an LLM-as-judge. Every run becomes a report card in the dashboard.",
-    tags: ["FastAPI", "Next.js", "Claude API", "Gemini API", "LLM-as-Judge"],
+      "An exam system for AI agents: benchmarks Claude and Gemini agents on their answers and tool use, recording latency and tokens, then scores them with rule-based checks and an LLM-as-judge. Ships with Docker and GitHub Actions CI.",
+    tags: ["FastAPI", "Next.js", "Claude API", "Gemini API", "LLM-as-Judge", "Docker"],
     href: "https://agentic-ai-evaluation-web.vercel.app/",
     repo: "https://github.com/eshakar/agentic-ai-evaluation",
   },
@@ -134,6 +142,14 @@ export const projects: Project[] = [
       "Interactive avatar rendering app in React, exploring dynamic customization and real-time preview.",
     tags: ["React.js", "JavaScript"],
     href: "https://avatar-development.vercel.app/",
+  },
+  {
+    title: "BridgeTalk (Alan AI Hackathon)",
+    tagline:
+      "Multilingual meeting assistant for English, Bengali and Hindi — Gemini translations, decisions, action items and grounded Q&A, with a rules-engine fallback when Gemini is unavailable.",
+    tags: ["FastAPI", "Next.js", "MongoDB", "Gemini API"],
+    href: "https://bridgetalk-gamma.vercel.app/",
+    repo: "https://github.com/eshakar/bridgetalk",
   },
   {
     title: "LabNest (Freelance · In Progress)",
@@ -172,9 +188,10 @@ export const experience: ExperienceEntry[] = [
       "Haircraft — built an e-commerce platform from scratch as sole full-stack owner.",
       "Owned the project end-to-end — architecture, hosting, domain, VPS, and Cloudflare CDN.",
       "Built the storefront in Next.js and the admin panel in Angular, backed by a Nest.js API layer, with AI capabilities integrated across the platform.",
-      "Jana Human Hair — shipped the company's Next.js site on Vercel, presenting the export product range and routing B2B buyers into a bulk-inquiry flow.",
+      "Jana Human Hair — migrated the site, domain, and DNS off vendor hosting to Next.js on Vercel + Cloudflare.",
+      "Building the Jana Human Hair e-commerce store: Next.js storefront and admin, Nest.js API, PostgreSQL.",
     ],
-    skills: ["Next.js", "Angular", "Nest.js", "Cloudflare", "AI Integration"],
+    skills: ["Next.js", "Angular", "Nest.js", "PostgreSQL", "Cloudflare", "AI Integration"],
   },
   {
     role: "Full Stack Developer",
@@ -232,11 +249,10 @@ export const experience: ExperienceEntry[] = [
 ];
 
 export const achievements = [
-  "Contributed to 100+ open-source projects on GitHub.",
   "5-star HackerRank rating in algorithms & data structures — top percentile.",
 ];
 
 export const education = [
-  { degree: "BCA (Pursuing Second Degree) · 8.76 CGPA", school: "Amity University", period: "2024 – 2027" },
+  { degree: "BCA · 8.76 CGPA · alongside full-time work", school: "Amity University", period: "2024 – 2027" },
   { degree: "BA English · 7.5 CGPA", school: "University of Kalyani", period: "2020 – 2023" },
 ];
